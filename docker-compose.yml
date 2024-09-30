@@ -1,0 +1,15 @@
+version: '3.8'  # Define a versão do Docker Compose
+services:
+  sqlserver:  # Nome do serviço (você pode mudar)
+    image: mcr.microsoft.com/mssql/server:2019-latest  # Imagem do SQL Server
+    container_name: sql_server_container  # Nome do contêiner
+    environment:  # Variáveis de ambiente necessárias para o SQL Server
+      - ACCEPT_EULA=Y  # Aceita os termos da licença
+      - SA_PASSWORD=Fernando@01  # Define a senha do usuário sa
+    ports:
+      - "1433:1433"  # Mapeia a porta 1433 do contêiner para a porta 1433 do host
+    volumes:  # Monta um volume para persistir os dados
+      - sqlserver_data:/var/opt/mssql  # Armazena os dados no volume persistente
+volumes:
+  sqlserver_data:
+    driver: local  # Define que o volume será local
